@@ -92,7 +92,7 @@ import { LogoutComponent } from './views/auth/logout/logout.component'; // Add t
     LogoutComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
-  providers: [],
+  providers: [LoginComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

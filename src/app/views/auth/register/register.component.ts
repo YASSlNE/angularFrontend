@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms'; // Add this line
+import { LoginComponent } from '../login/login.component';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-register',
@@ -16,10 +18,17 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-
-  constructor(private authService: AuthService) { }
+  isLoggedIn = false;
+  loggedInUser: string = '';
+  constructor(private storageService: StorageService, private authService: AuthService) { 
+    this.isLoggedIn = this.storageService.isLoggedIn();
+    if (this.isLoggedIn) {
+      this.loggedInUser = this.storageService.getUser().username;
+    }
+  }
 
   ngOnInit(): void {
+    console.log(this.isLoggedIn);
   }
 
   onSubmit(): void {

@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   errorMessage = '';
   roles: string[] = [];
   rememberMe: boolean=false;
+  username: any;
 
   constructor(private authService: AuthService, private storageService: StorageService) {
     const storedRememberMe = localStorage.getItem('rememberMe');
@@ -26,8 +27,6 @@ export class LoginComponent implements OnInit {
     if (this.rememberMe) {
       const rememberedUsername = localStorage.getItem('rememberedUsername');
       const rememberedPassword = localStorage.getItem('rememberedPassword');
-      console.log(rememberedPassword);
-      console.log(rememberedUsername);
       if (rememberedUsername && rememberedPassword) {
         
         this.form.username = rememberedUsername;
@@ -44,9 +43,13 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.storageService.isLoggedIn()) {
+      const user = this.storageService.getUser();
+      this.roles = user.roles;
+      this.username = user.username;
       this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
+      // this.roles = this.storageService.getUser().roles;
     }
     
   }

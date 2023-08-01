@@ -30,6 +30,15 @@
           <!-- <div class="text-blueGray-400 text-center mb-3 font-bold">
             <small>Or sign in with credentials</small>
           </div> -->
+
+          <div *ngIf="isLoggedIn">
+            <p class="text-center my-4">
+              You are already logged in as <b>{{ username }}</b>.
+              <br/>
+              <a href="/">Click here to go to the home page</a>.
+            </p>
+          </div>
+
           <form
           *ngIf="!isLoggedIn"
           name="form"
@@ -110,7 +119,7 @@
     
             <div class="form-group text-center mt-6 mb-3">
               <button class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150">
-                Sign In
+                Log In
               </button>
             </div>
     
@@ -162,7 +171,7 @@
           </form>
         </div>
       </div>
-      <div class="flex flex-wrap mt-6 relative">
+      <div class="flex flex-wrap mt-6 relative" *ngIf="!isLoggedIn">
         <div class="w-1/2">
           <a href="javascript:void(0)" class="text-blueGray-200">
             <small>Forgot password?</small>

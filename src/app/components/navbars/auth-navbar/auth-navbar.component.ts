@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+// import { LoginComponent } from "src/app/views/auth/login/login.component";
 import { LogoutComponent } from "src/app/views/auth/logout/logout.component";
 import { StorageService } from "src/app/views/auth/services/storage.service";
 
@@ -9,6 +10,7 @@ import { StorageService } from "src/app/views/auth/services/storage.service";
 export class AuthNavbarComponent implements OnInit {
 
   @ViewChild(LogoutComponent) logoutComponent!: LogoutComponent;
+  // @ViewChild(LoginComponent) loginComponent!: LoginComponent;
 
   isLoggedIn = false;
   showAdminBoard = false;
