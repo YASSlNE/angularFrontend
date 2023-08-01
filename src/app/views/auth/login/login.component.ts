@@ -15,8 +15,19 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+  rememberMe: boolean=false;
 
-  constructor(private authService: AuthService, private storageService: StorageService) { }
+  constructor(private authService: AuthService, private storageService: StorageService) {
+    const storedRememberMe = localStorage.getItem('rememberMe');
+    if (storedRememberMe !== null) {
+      this.rememberMe = storedRememberMe === 'true';
+    }
+
+  }
+  onRememberMeChange(): void {
+    localStorage.setItem('rememberMe', this.rememberMe.toString());
+  }
+
 
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
@@ -25,13 +36,23 @@ export class LoginComponent implements OnInit {
     }
   }
 
+
   onSubmit(): void {
-    console.log("slmdqkfjmqslkdfjqsmldkfjqsmdl")
     const { username, password } = this.form;
 
     this.authService.login(username, password).subscribe({
       next: data => {
         this.storageService.saveUser(data);
+
+        if (this.rememberMe) {
+          // Store user credentials in LocalStorage
+          localStorage.setItem('storedUsername', username);
+          localStorage.setItem('storedPassword', password);
+        } else {
+          // Clear stored user credentials
+          localStorage.removeItem('storedUsername');
+          localStorage.removeItem('storedPassword');
+        }
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;

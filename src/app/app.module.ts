@@ -50,7 +50,8 @@ import { UserDropdownComponent } from "./components/dropdowns/user-dropdown/user
 import { HttpClientModule } from '@angular/common/http';
 
 
-import { FormsModule } from '@angular/forms'; // Add this line
+import { FormsModule } from '@angular/forms';
+import { LogoutComponent } from './views/auth/logout/logout.component'; // Add this line
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { FormsModule } from '@angular/forms'; // Add this line
     IndexComponent,
     LandingComponent,
     ProfileComponent,
+    LogoutComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
