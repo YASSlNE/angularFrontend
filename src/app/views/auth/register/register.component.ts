@@ -10,6 +10,11 @@ import { StorageService } from '../services/storage.service';
   // styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+
+
+  isLoading = false; // New property to handle loading state
+
+
   form: any = {
     username: null,
     email: null,
@@ -20,7 +25,7 @@ export class RegisterComponent implements OnInit {
   errorMessage = '';
   isLoggedIn = false;
   loggedInUser: string = '';
-  constructor(private storageService: StorageService, private authService: AuthService) { 
+  constructor(private loginComponent: LoginComponent,  private storageService: StorageService, private authService: AuthService) { 
     this.isLoggedIn = this.storageService.isLoggedIn();
     if (this.isLoggedIn) {
       this.loggedInUser = this.storageService.getUser().username;
@@ -31,19 +36,41 @@ export class RegisterComponent implements OnInit {
     console.log(this.isLoggedIn);
   }
 
+
+
+
+
+
   onSubmit(): void {
+
+
+    this.isLoading = true; 
+
     const { username, email, password } = this.form;
+
+
+    console.log(this.form);
+
 
     this.authService.register(username, email, password).subscribe({
       next: data => {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        this.loginComponent.onRegistrationLogin(username, password);
       },
       error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
+      },
+      complete: ()=>{
+        this.isLoading = false; 
       }
     });
   }
+
+
+
+
+
 }

@@ -63,6 +63,7 @@
               </label>
               <input
                 type="text"
+                id="username"
                 name="username"
                 [(ngModel)]="form.username"
                 required
@@ -87,11 +88,12 @@
             <div class="relative w-full mb-3">
               <label
                 class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                htmlFor="grid-password"
+                for="password"
               >
                 Password
               </label>
               <input
+                id="password"
                 name="password"
                 [(ngModel)]="form.password"
                 required

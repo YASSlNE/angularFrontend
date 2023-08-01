@@ -12,7 +12,7 @@
           </div>
 
           <form
-            *ngIf="!isSuccessful && !isLoggedIn"
+            *ngIf="!isLoading && !isSuccessful && !isLoggedIn"
             name="form"
             (ngSubmit)="f.form.valid && onSubmit()"
             #f="ngForm"
@@ -21,16 +21,20 @@
           <div class="relative w-full mb-3">
             <label
               class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-              for="name"
+              for="email"
             >
-              Name
+              Email
             </label>
             <input
-              id="name"
-              name="name"
+              id="email"
+              name="email"
               type="text"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-              placeholder="Name"
+              placeholder="Email"
+              [(ngModel)] = "form.email"
+              required
+              #email="ngModel"
+              [ngClass]="{ 'is-invalid': f.submitted && email.errors }"    
             />
           </div>
 
@@ -77,18 +81,35 @@
             />
           </div>
 
+
+
+
+
+
+
+
             <div class="text-center mt-6">
+
+
               <button
+              [disabled] = "isLoading"
                 class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                type="button"
               >
-                Create Account
+                {{isLoading ? 'Loading...' : 'Create Account'}}
               </button>
             </div>
+
+
+
+
+
+
+
+
           </form>
 
           <!-- "Already has an account?" button -->
-          <div class="text-center mt-4">
+          <div class="text-center mt-4" *ngIf="(!isLoggedIn && !isLoading)">
             <a [routerLink]="['/auth/login']">
               <button
                 class="text-blueGray-500 font-normal text-sm underline"
@@ -99,6 +120,9 @@
             </a>
           </div>
 
+          <div class="text-center mt-4" *ngIf="(!isLoggedIn && isLoading)">
+            <p>Loading...</p>
+          </div>
 
         </div>
       </div>
