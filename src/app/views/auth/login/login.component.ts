@@ -7,6 +7,11 @@ import { StorageService } from '../services/storage.service';
   templateUrl: './login.component.html',
 })
 export class LoginComponent implements OnInit {
+
+
+  isLoading = false;
+
+
   form: any = {
     username: null,
     password: null
@@ -67,6 +72,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.isLoading = true;
+
     const { username, password } = this.form;
 
     this.authService.login(username, password).subscribe({

@@ -31,7 +31,7 @@
             <small>Or sign in with credentials</small>
           </div> -->
 
-          <div *ngIf="isLoggedIn">
+          <div *ngIf="isLoggedIn && !isLoading">
             <p class="text-center my-4">
               You are already logged in as <b>{{ username }}</b>.
               <br/>
@@ -39,8 +39,15 @@
             </p>
           </div>
 
+          <div class="mt-4 flex flex-col items-center" *ngIf="(!isLoggedIn && isLoading)">
+            <img src="/assets/img/spinner.gif" width="50" height="50" alt="Loading..." />
+            <div class="mt-2">
+              <p>Loading...</p>
+            </div>
+          </div>
+
           <form
-          *ngIf="!isLoggedIn"
+          *ngIf="!isLoggedIn && !isLoading"
           name="form"
           (ngSubmit)="f.form.valid && onSubmit()"
           #f="ngForm"

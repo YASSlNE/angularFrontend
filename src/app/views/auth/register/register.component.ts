@@ -42,16 +42,8 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmit(): void {
-
-
-    this.isLoading = true; 
-
+    this.isLoading = true;
     const { username, email, password } = this.form;
-
-
-    console.log(this.form);
-
-
     this.authService.register(username, email, password).subscribe({
       next: data => {
         console.log(data);
@@ -63,11 +55,12 @@ export class RegisterComponent implements OnInit {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
       },
-      complete: ()=>{
-        this.isLoading = false; 
-      }
+      // complete: ()=>{
+      //   this.isLoading = false; 
+      // }
     });
   }
+  
 
 
 
