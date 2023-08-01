@@ -78,8 +78,15 @@
               type="password"
               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
               placeholder="Password"
-            />
+            >
+            <div class="absolute top-0 right-0 mr-2">
+              <i
+                class="fas fa-eye text-blueGray-500 cursor-pointer"
+                (click)="password.type = 'text'"
+              ></i>
+            </div>
           </div>
+          
 
 
 
