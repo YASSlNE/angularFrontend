@@ -23,8 +23,22 @@ export class LoginComponent implements OnInit {
       this.rememberMe = storedRememberMe === 'true';
     }
 
+    if (this.rememberMe) {
+      const rememberedUsername = localStorage.getItem('rememberedUsername');
+      const rememberedPassword = localStorage.getItem('rememberedPassword');
+      console.log(rememberedPassword);
+      console.log(rememberedUsername);
+      if (rememberedUsername && rememberedPassword) {
+        
+        this.form.username = rememberedUsername;
+        this.form.password = rememberedPassword;
+      }
+
+    }
+
   }
   onRememberMeChange(): void {
+    console.log("onRememberMeChange")
     localStorage.setItem('rememberMe', this.rememberMe.toString());
   }
 
@@ -34,6 +48,7 @@ export class LoginComponent implements OnInit {
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
     }
+    
   }
 
 
@@ -46,12 +61,12 @@ export class LoginComponent implements OnInit {
 
         if (this.rememberMe) {
           // Store user credentials in LocalStorage
-          localStorage.setItem('storedUsername', username);
-          localStorage.setItem('storedPassword', password);
+          localStorage.setItem('rememberedUsername', username);
+          localStorage.setItem('rememberedPassword', password);
         } else {
           // Clear stored user credentials
-          localStorage.removeItem('storedUsername');
-          localStorage.removeItem('storedPassword');
+          localStorage.removeItem('rememberedUsername');
+          localStorage.removeItem('rememberedPassword');
         }
 
         this.isLoginFailed = false;
@@ -65,6 +80,10 @@ export class LoginComponent implements OnInit {
       }
     });
   }
+
+
+
+
 
   reloadPage(): void {
     window.location.reload();
