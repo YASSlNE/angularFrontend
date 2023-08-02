@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   isLoading = false; // New property to handle loading state
 
+  isVisible = false;
 
   form: any = {
     username: null,
@@ -37,7 +38,9 @@ export class RegisterComponent implements OnInit {
   }
 
 
-
+  unHidePassword() {
+    this.isVisible = !this.isVisible;
+  }
 
 
 

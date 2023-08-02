@@ -64,8 +64,7 @@
             <div class="form-group relative w-full mb-3">
               <label
                 class="block uppercase text-slate-600 text-xs font-bold mb-2"
-                for="username"
-              >
+                for="username">
               Username
               </label>
               <input
@@ -79,10 +78,12 @@
                 class="form-control border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                 placeholder="Username"
               />
-              <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
+              <!-- <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
                 Username is required!
+              </div> -->
+              <div *ngIf="f.submitted && username.errors?.required" class="text-red-500 text-xs mt-1">
+                Username is required
               </div>
-    
             </div>
 
 
@@ -112,11 +113,21 @@
                 placeholder="Password"
               />
               <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
-                <div *ngIf="password.errors['required']">Password is required</div>
-                <div *ngIf="password.errors['minlength']">
+                <div *ngIf="f.submitted && password.errors?.required" class="text-red-500 text-xs mt-1">
+                  Password is required
+                </div>
+                                <div *ngIf="password.errors['minlength']">
                   Password must be at least 6 characters
                 </div>
+                
               </div>
+              <div style="position:absolute;top:50%;right:5%">
+                  <i
+                  class="fas text-blueGray-500 cursor-pointer"
+                  [class]="isVisible? 'fa-eye' :'fa-eye-slash' "
+                  (click)="unHidePassword()"
+                  ></i>
+            </div>
             </div>
 
             

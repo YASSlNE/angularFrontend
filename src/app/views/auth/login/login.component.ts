@@ -9,6 +9,12 @@ import { StorageService } from '../services/storage.service';
 export class LoginComponent implements OnInit {
 
 
+
+  isVisible = false;
+
+  unHidePassword(){
+    this.isVisible = !this.isVisible;
+  }
   isLoading = false;
 
 
