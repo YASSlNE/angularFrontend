@@ -149,15 +149,15 @@
 
 
 
-        <pre class="mt-4 p-4 border rounded-lg bg-gray-100 overflow-auto" *ngIf="generatedCode">
-          <code [innerHTML]="generatedCode">
+      <textarea
+        class="mt-4 p-4 border rounded-lg bg-gray-100 overflow-auto w-full h-40"
+        *ngIf="generatedCode"
+        readonly>
 
 
-
+        {{ generatedCode }}
+      </textarea>
             
-          </code>
-        </pre>
-        
 
 
 
