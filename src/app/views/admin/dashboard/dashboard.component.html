@@ -7,7 +7,11 @@
 
       <div class="w-full px-4 text-center mt-4">
         <div class="my-4">
+          
           <div class="flex justify-center items-center">
+
+
+
             <div class="flex flex-col">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="componentName">Component Name</label>
               <input
@@ -17,6 +21,10 @@
                 [(ngModel)]="componentName"
               />
             </div>
+
+
+
+            
             <div class="w-10"></div>
 
             <div id="lang" class="ml-8 flex flex-col" style="margin-right: 125px;">
@@ -51,52 +59,58 @@
 
 
 
-          <div *ngFor="let element of formElements; let i = index" class="my-2 p-4 border rounded-lg">
+<!-- ... other parts of the code ... -->
 
-            <div class="flex flex-col">
-              <div class="flex mb-2">
-                <div class="flex-1 mr-2">
-                  <label class="block text-gray-700 text-sm font-bold mb-1" for="elementType">Element Type</label>
-                  <input
-                    type="text"
-                    id="elementType"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-indigo-500"
-                    [(ngModel)]="element.type"
-                  />
-                </div>
-                <div class="flex-1 mr-2">
-                  <label class="block text-gray-700 text-sm font-bold mb-1" for="elementName">Element Name</label>
-                  <input
-                    type="text"
-                    id="elementName"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-indigo-500"
-                    [(ngModel)]="element.name"
-                  />
-                </div>
-                <div class="flex-1">
-                  <label class="block text-gray-700 text-sm font-bold mb-1" for="validator">Validator</label>
-                  <input
-                    type="text"
-                    id="validator"
-                    class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-indigo-500"
-                    [(ngModel)]="element.validator"
-                  />
-                </div>
-                <button style="margin-left: 16px; margin-top: 15px;" class="
-                 float-right
-                 text-red-500
-                 bg-transparent 
-                 border 
-                 border-red-500 
-                 hover:text-white
-                 hover:bg-red-500
-                 rounded-lg px-4 py-2 "
-                 (click)="removeFormElement(i)">
-                  <span class="text-2xl">-</span> Remove Element
-                </button>
-              </div>
-            </div>
-          </div>
+<div *ngFor="let element of formElements; let i = index" class="my-2 p-4 border rounded-lg">
+  <div class="flex flex-col">
+    <div class="flex mb-2">
+      <div class="flex-1 mr-2">
+        <label class="block text-gray-700 text-sm font-bold mb-1" [for]="'elementType_' + i">Element Type</label>
+        <select
+          id="elementType_{{ i }}"
+          class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-indigo-500"
+          [(ngModel)]="element.type"
+        >
+          <option *ngFor="let type of elementTypes" [value]="type.value" [selected]="type.name === element.type">{{ type.name }}</option>
+        </select>
+      </div>
+      <div class="flex-1 mr-2">
+        <label class="block text-gray-700 text-sm font-bold mb-1" [for]="'elementName_' + i">Element Name</label>
+        <input
+          type="text"
+          [id]="'elementName_' + i"
+          class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-indigo-500"
+          [(ngModel)]="element.name"
+        />
+      </div>
+      <div class="flex-1">
+        <label class="block text-gray-700 text-sm font-bold mb-1" [for]="'validator_' + i">Validator</label>
+        <input
+          type="text"
+          [id]="'validator_' + i"
+          class="w-full px-3 py-2 border rounded-lg text-gray-700 focus:outline-none focus:border-indigo-500"
+          [(ngModel)]="element.validator"
+        />
+      </div>
+      <button style="margin-left: 16px; margin-top: 15px;" class="
+         float-right
+         text-red-500
+         bg-transparent 
+         border 
+         border-red-500 
+         hover:text-white
+         hover:bg-red-500
+         rounded-lg px-4 py-2 "
+         (click)="removeFormElement(i)">
+        <span class="text-2xl">-</span> Remove Element
+      </button>
+
+      
+    </div>
+  </div>
+</div>
+
+<!-- ... other parts of the code ... -->
           
           
 
@@ -116,6 +130,9 @@
 
           <button class="px-4 py-2 mt-4 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg" (click)="addFormElement()">
             <span class="text-lg">+</span> Add Element
+          </button>
+          <button class="px-4 py-2 mt-4 bg-indigo-500 hover:bg-indigo-600 text-white font-bold rounded-lg" (click)="generateCode()" style="margin-left: 20px;" >
+            <span class="fas fa-code text-lg"> Generate code</span> 
           </button>
         </div>
       </div>
