@@ -51,7 +51,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 
 import { FormsModule } from '@angular/forms';
-import { LogoutComponent } from './views/auth/logout/logout.component'; // Add this line
+import { LogoutComponent } from './views/auth/logout/logout.component';
+import { FormGeneratorComponent } from './components/form-generator/form-generator.component'; // Add this line
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { LogoutComponent } from './views/auth/logout/logout.component'; // Add t
     LandingComponent,
     ProfileComponent,
     LogoutComponent,
+    FormGeneratorComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [LoginComponent],
