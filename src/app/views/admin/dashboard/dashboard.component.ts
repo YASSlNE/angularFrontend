@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: "app-dashboard",
@@ -10,12 +11,13 @@ export class DashboardComponent implements OnInit {
   componentName: string = '';
   selectedLanguage: string = 'javascript';
   formElements: any[] = [];
+  elementTypes: any[] = [{name:"Input", value:"input"}, {name: "Select", value: "select"}, {name : "Text area", value: "textarea"}];
 
   ngOnInit() {}
 
   addFormElement() {
     this.formElements.push({
-      type: "",
+      type: "input",
       name: "",
       validator: "",
     });
@@ -24,4 +26,42 @@ export class DashboardComponent implements OnInit {
   removeFormElement(index: number) {
     this.formElements.splice(index, 1);
   }
+
+
+  generateCode() {
+    let elementsArray = "";
+  
+    let inputElement = `
+    <div>
+      <label for="{elementName}" class="block mb-2 text-sm font-medium text-gray-900">
+        {elementName}
+      </label>
+      <input type="text" id="{elementName}" name="{elementName}" 
+        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
+        focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+      >
+    </div>`;
+  
+    for (let element of this.formElements) {
+      switch (element.type) {
+        case "input":
+          let elementCode = inputElement.replace(/{elementName}/g, element.name);
+          elementsArray += elementCode; // Append the generated code to the elementsArray
+          break;
+        // Add more cases for other types of form elements if needed
+      }
+    }
+  
+    let code = `
+      <form id="form" action="#" class="space-y-8">
+        ${elementsArray}
+      </form>`;
+    
+    console.log(code);
+  }
+  
+
+
 }
+
+
