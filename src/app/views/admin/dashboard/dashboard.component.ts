@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: "app-dashboard",
@@ -8,6 +7,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 })
 export class DashboardComponent implements OnInit {
+
+
+
+  generatedCode: string = '';
   componentName: string = '';
   selectedLanguage: string = 'javascript';
   formElements: any[] = [];
@@ -40,7 +43,8 @@ export class DashboardComponent implements OnInit {
         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
         focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
       >
-    </div>`;
+    </div>
+    `;
   
     for (let element of this.formElements) {
       switch (element.type) {
@@ -57,7 +61,7 @@ export class DashboardComponent implements OnInit {
         ${elementsArray}
       </form>`;
     
-    console.log(code);
+    this.generatedCode = code;
   }
   
 
